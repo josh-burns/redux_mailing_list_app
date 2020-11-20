@@ -1,8 +1,7 @@
 const newUserInfoReducer = (state = [], action) => {
   switch (action.type) {
-    case "NEW_INFO_SUBMITTED":
-      console.log(action.email);
-      return [...state, { email: action.email }];
+    case "FINAL_INFO_SUBMITTED":
+      return [{ email: action.email, name: action.name, isCreated: true }];
     default:
       return state;
   }

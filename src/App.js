@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        {/* TODO make signupcard conditional on if isCreated is false */}
         <SignupCardContainer></SignupCardContainer>
       </header>
     </div>

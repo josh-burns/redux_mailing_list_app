@@ -1,36 +1,60 @@
-import React from "react";
+/* eslint-disable no-unused-expressions */
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { submitNewUserInfo } from "../actions/index";
+import { submitFinalUserInfo } from "../actions/index";
 
-function SignupCard(dispatch) {
-  let input;
+function SignupCard({ dispatch }) {
+  let value;
 
-  function handleChange(evt) {
-    const value = evt.target.value;
-    console.log("new value", evt.target.value);
-  }
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    value = event.target.value;
+
+    switch (name) {
+      case "email":
+        return setEmail(value);
+      case "name":
+        return setName(value);
+      default:
+        null;
+    }
+    return;
+  };
+
+  const handleSubmission = (event) => {
+    event.preventDefault();
+    dispatch(submitFinalUserInfo(email, name));
+    setEmail("");
+    setName("");
+  };
+
   return (
     <div>
-      {" "}
       Signup Card
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!input.value.trim()) {
-              return;
-            }
-            dispatch(submitNewUserInfo(input.value));
-            input.value = "";
-          }}
-        >
-          Email Address:
-          <input
-            type="text"
-            value="emailaddress"
-            onChange={handleChange}
-            ref={(node) => (input = node)}
-          />{" "}
+        <form onSubmit={handleSubmission}>
+          <label>
+            Email Address:
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />{" "}
+            <br />
+          </label>
+          <label>
+            name:
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleChange}
+            />
+          </label>
           <br />
           <input type="submit" value="submit" /> <br />
         </form>
