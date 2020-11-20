@@ -26,6 +26,9 @@ function SignupCard({ dispatch }) {
 
   const handleSubmission = (event) => {
     event.preventDefault();
+    if (!email.trim() || !name.trim()) {
+      return;
+    }
     dispatch(submitFinalUserInfo(email, name));
     setEmail("");
     setName("");
@@ -33,21 +36,21 @@ function SignupCard({ dispatch }) {
 
   return (
     <div>
-      Signup Card
+      <h2>Signup Card</h2>
       <div>
         <form onSubmit={handleSubmission}>
           <label>
-            Email Address:
+            Email Address:{"  "}
             <input
               type="text"
               name="email"
               value={email}
               onChange={handleChange}
-            />{" "}
+            />
             <br />
           </label>
           <label>
-            name:
+            name: {"  "}
             <input
               type="text"
               name="name"
