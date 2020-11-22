@@ -25,11 +25,12 @@ function SignupCard({ dispatch }) {
   };
 
   const handleSubmission = (event) => {
-    event.preventDefault();
     if (!email.trim() || !name.trim()) {
       return;
     }
     dispatch(submitFinalUserInfo(email, name));
+    event.preventDefault();
+
     setEmail("");
     setName("");
   };

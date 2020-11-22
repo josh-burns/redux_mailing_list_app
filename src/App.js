@@ -9,7 +9,8 @@ function App(props) {
         {props.userInfo[0] ? (
           <div>
             <div>
-              <h2>Thanks for signing up!, please see details below:</h2>
+              <h1>Thanks for signing up!</h1>
+              <h3> Please see details below:</h3>
             </div>
             <ul>
               <li> Name: {props.userInfo[0].name}</li> <br />
