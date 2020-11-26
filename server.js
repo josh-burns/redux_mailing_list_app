@@ -3,9 +3,17 @@ const path = require("path");
 const app = express();
 var mysql = require("mysql");
 require("dotenv").config();
+const rateLimit = require("express-rate-limit");
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.json());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 30, // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
 
 var connection = mysql.createConnection({
   host: process.env.host,
