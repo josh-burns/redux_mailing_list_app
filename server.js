@@ -2,15 +2,16 @@ const express = require("express");
 const path = require("path");
 const app = express();
 var mysql = require("mysql");
+require("dotenv").config();
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.json());
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "newuser",
-  password: "pass123",
-  database: "mailing_list",
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database,
 });
 
 app.get("/express_backend", (req, res) => {
