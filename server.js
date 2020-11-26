@@ -17,24 +17,24 @@ app.get("/express_backend", (req, res) => {
   res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
 });
 
-// POST method route
 app.post("/post", (req, res) => {
+  // check if duplicate is returned
   connection.query(
     `SELECT * FROM mailinglist WHERE email_address =  '${req.body.data.email}'`,
-    function (err, res, field) {
-      if (res.length === 0) {
-        console.log("not a duplicate");
+
+    function (err, response, field) {
+      if (response.length === 0) {
         connection.query(
           "INSERT INTO mailing_list.mailinglist (name,email_address)" +
             `VALUES('${req.body.data.name}', '${req.body.data.email}')`,
-          function (err, rows, fields) {
+          function (err) {
             if (err) throw err;
-            console.log("Added User " + req.body.data.email + "successfully");
+            console.log("Added User " + req.body.data.email + " successfully");
+            res.send({ express: "success" });
           }
         );
       } else {
-        console.log("duplicate");
-        res.sendStatus(403);
+        res.send({ express: "duplicate" });
       }
     }
   );

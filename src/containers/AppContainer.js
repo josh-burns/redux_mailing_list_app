@@ -4,6 +4,7 @@ import App from "../App";
 function mapStateToProps(state) {
   return {
     userInfo: state,
+    duplicate: state.duplicate,
   };
 }
 

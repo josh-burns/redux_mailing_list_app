@@ -5,21 +5,35 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        {/* TODO make signupcard conditional on if isCreated is false */}
-        {props.userInfo[0] ? (
+        {props.userInfo.newUser.isCreated === false ? (
+          <SignupCardContainer></SignupCardContainer>
+        ) : null}
+
+        {props.userInfo.newUser[0] && !props.duplicate.isDuplicate ? (
           <div>
             <div>
               <h1>Thanks for signing up!</h1>
               <h3> Please see details below:</h3>
             </div>
             <ul>
-              <li> Name: {props.userInfo[0].name}</li> <br />
-              <li> email: {props.userInfo[0].email}</li>
+              <li> Name: {props.userInfo.newUser[0].name}</li> <br />
+              <li> email: {props.userInfo.newUser[0].email}</li>
             </ul>
           </div>
-        ) : (
-          <SignupCardContainer></SignupCardContainer>
-        )}
+        ) : null}
+
+        {props.duplicate.isDuplicate ? (
+          <div>
+            <h1> Oops!</h1>
+            <br />
+            This email address is already on the list - please review your
+            submission
+            <br />
+            <a href="/">
+              <button> back</button>
+            </a>
+          </div>
+        ) : null}
       </header>
     </div>
   );

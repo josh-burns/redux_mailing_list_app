@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import newUserInfoReducer from "./reducers/newUserInfoReducer";
+import rootReducer from "./reducers/index";
 import callBackendAPI from "./api";
 
 const logger = () => {
   return (next) => (action) => {
-    callBackendAPI(action).then((res) => console.log(res));
+    if (action.type === "INFO_SUBMITTED") {
+      callBackendAPI(action).then((res) => {});
+    }
     const returnValue = next(action);
     return returnValue;
   };
@@ -13,7 +15,7 @@ const logger = () => {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  newUserInfoReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(logger))
 );
 

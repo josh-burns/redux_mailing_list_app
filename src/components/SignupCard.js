@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { submitFinalUserInfo } from "../actions/index";
+import { submitFinalUserInfo, duplicateSetAction } from "../actions/index";
 
 function SignupCard({ dispatch }) {
   let value;
@@ -28,6 +28,7 @@ function SignupCard({ dispatch }) {
     if (!email.trim() || !name.trim()) {
       return;
     }
+    dispatch(duplicateSetAction(false));
     dispatch(submitFinalUserInfo(email, name));
     event.preventDefault();
 
